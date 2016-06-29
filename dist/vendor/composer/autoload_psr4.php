@@ -6,6 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Silk\\' => array($baseDir . '/src'),
+    'Silk\\' => array($vendorDir . '/silk/silk/src'),
     'Illuminate\\' => array($vendorDir . '/tightenco/collect/src/Illuminate'),
 );

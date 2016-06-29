@@ -4,11 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit68d9b46c6d0805b67fbac94fa4f0bba4
+class ComposerStaticInit880912c82efdc366c5b7b839e5a2ab97
 {
     public static $files = array (
         '7ba3c774c30c8399e359b5ff7f3b943e' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/helpers.php',
-        '9482a87e9277ddb6e60ffd43b6b8c721' => __DIR__ . '/../..' . '/src/functions.php',
+        '9482a87e9277ddb6e60ffd43b6b8c721' => __DIR__ . '/..' . '/silk/silk/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -25,7 +25,7 @@ class ComposerStaticInit68d9b46c6d0805b67fbac94fa4f0bba4
     public static $prefixDirsPsr4 = array (
         'Silk\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/..' . '/silk/silk/src',
         ),
         'Illuminate\\' => 
         array (
@@ -33,11 +33,37 @@ class ComposerStaticInit68d9b46c6d0805b67fbac94fa4f0bba4
         ),
     );
 
+    public static $classMap = array (
+        'Illuminate\\Contracts\\Support\\Arrayable' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Contracts/Support/Arrayable.php',
+        'Illuminate\\Contracts\\Support\\Jsonable' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Contracts/Support/Jsonable.php',
+        'Illuminate\\Support\\Arr' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Arr.php',
+        'Illuminate\\Support\\Collection' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Collection.php',
+        'Illuminate\\Support\\Traits\\Macroable' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Traits/Macroable.php',
+        'Silk\\Event\\Hook' => __DIR__ . '/..' . '/silk/silk/src/Event/Hook.php',
+        'Silk\\Exception\\WP_ErrorException' => __DIR__ . '/..' . '/silk/silk/src/Exception/WP_ErrorException.php',
+        'Silk\\Meta\\Meta' => __DIR__ . '/..' . '/silk/silk/src/Meta/Meta.php',
+        'Silk\\Meta\\ObjectMeta' => __DIR__ . '/..' . '/silk/silk/src/Meta/ObjectMeta.php',
+        'Silk\\Post\\ClassNameAsPostType' => __DIR__ . '/..' . '/silk/silk/src/Post/ClassNameAsPostType.php',
+        'Silk\\Post\\Exception\\InvalidPostTypeNameException' => __DIR__ . '/..' . '/silk/silk/src/Post/Exception/InvalidPostTypeNameException.php',
+        'Silk\\Post\\Exception\\ModelPostTypeMismatchException' => __DIR__ . '/..' . '/silk/silk/src/Post/Exception/ModelPostTypeMismatchException.php',
+        'Silk\\Post\\Exception\\NonExistentPostTypeException' => __DIR__ . '/..' . '/silk/silk/src/Post/Exception/NonExistentPostTypeException.php',
+        'Silk\\Post\\Exception\\PostNotFoundException' => __DIR__ . '/..' . '/silk/silk/src/Post/Exception/PostNotFoundException.php',
+        'Silk\\Post\\Model' => __DIR__ . '/..' . '/silk/silk/src/Post/Model.php',
+        'Silk\\Post\\Page' => __DIR__ . '/..' . '/silk/silk/src/Post/Page.php',
+        'Silk\\Post\\Post' => __DIR__ . '/..' . '/silk/silk/src/Post/Post.php',
+        'Silk\\Post\\PostType' => __DIR__ . '/..' . '/silk/silk/src/Post/PostType.php',
+        'Silk\\Post\\PostTypeBuilder' => __DIR__ . '/..' . '/silk/silk/src/Post/PostTypeBuilder.php',
+        'Silk\\Query\\Builder' => __DIR__ . '/..' . '/silk/silk/src/Query/Builder.php',
+        'Silk\\Support\\Callback' => __DIR__ . '/..' . '/silk/silk/src/Support/Callback.php',
+        'Silk\\Support\\Shortcode' => __DIR__ . '/..' . '/silk/silk/src/Support/Shortcode.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit68d9b46c6d0805b67fbac94fa4f0bba4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit68d9b46c6d0805b67fbac94fa4f0bba4::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit880912c82efdc366c5b7b839e5a2ab97::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit880912c82efdc366c5b7b839e5a2ab97::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit880912c82efdc366c5b7b839e5a2ab97::$classMap;
 
         }, null, ClassLoader::class);
     }

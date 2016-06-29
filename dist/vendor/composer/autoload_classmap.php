@@ -6,4 +6,26 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Illuminate\\Contracts\\Support\\Arrayable' => $vendorDir . '/tightenco/collect/src/Illuminate/Contracts/Support/Arrayable.php',
+    'Illuminate\\Contracts\\Support\\Jsonable' => $vendorDir . '/tightenco/collect/src/Illuminate/Contracts/Support/Jsonable.php',
+    'Illuminate\\Support\\Arr' => $vendorDir . '/tightenco/collect/src/Illuminate/Support/Arr.php',
+    'Illuminate\\Support\\Collection' => $vendorDir . '/tightenco/collect/src/Illuminate/Support/Collection.php',
+    'Illuminate\\Support\\Traits\\Macroable' => $vendorDir . '/tightenco/collect/src/Illuminate/Support/Traits/Macroable.php',
+    'Silk\\Event\\Hook' => $vendorDir . '/silk/silk/src/Event/Hook.php',
+    'Silk\\Exception\\WP_ErrorException' => $vendorDir . '/silk/silk/src/Exception/WP_ErrorException.php',
+    'Silk\\Meta\\Meta' => $vendorDir . '/silk/silk/src/Meta/Meta.php',
+    'Silk\\Meta\\ObjectMeta' => $vendorDir . '/silk/silk/src/Meta/ObjectMeta.php',
+    'Silk\\Post\\ClassNameAsPostType' => $vendorDir . '/silk/silk/src/Post/ClassNameAsPostType.php',
+    'Silk\\Post\\Exception\\InvalidPostTypeNameException' => $vendorDir . '/silk/silk/src/Post/Exception/InvalidPostTypeNameException.php',
+    'Silk\\Post\\Exception\\ModelPostTypeMismatchException' => $vendorDir . '/silk/silk/src/Post/Exception/ModelPostTypeMismatchException.php',
+    'Silk\\Post\\Exception\\NonExistentPostTypeException' => $vendorDir . '/silk/silk/src/Post/Exception/NonExistentPostTypeException.php',
+    'Silk\\Post\\Exception\\PostNotFoundException' => $vendorDir . '/silk/silk/src/Post/Exception/PostNotFoundException.php',
+    'Silk\\Post\\Model' => $vendorDir . '/silk/silk/src/Post/Model.php',
+    'Silk\\Post\\Page' => $vendorDir . '/silk/silk/src/Post/Page.php',
+    'Silk\\Post\\Post' => $vendorDir . '/silk/silk/src/Post/Post.php',
+    'Silk\\Post\\PostType' => $vendorDir . '/silk/silk/src/Post/PostType.php',
+    'Silk\\Post\\PostTypeBuilder' => $vendorDir . '/silk/silk/src/Post/PostTypeBuilder.php',
+    'Silk\\Query\\Builder' => $vendorDir . '/silk/silk/src/Query/Builder.php',
+    'Silk\\Support\\Callback' => $vendorDir . '/silk/silk/src/Support/Callback.php',
+    'Silk\\Support\\Shortcode' => $vendorDir . '/silk/silk/src/Support/Shortcode.php',
 );
