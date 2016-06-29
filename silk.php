@@ -7,6 +7,9 @@
  *
  * Version: 0.9
  *
+ * GitHub Plugin URI: aaemnnosttv/silk-plugin
+ * Requires PHP: 5.5
+ *
  * License: MIT
  * License URI: https://opensource.org/licenses/MIT
  */
