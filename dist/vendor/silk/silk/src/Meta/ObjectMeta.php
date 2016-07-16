@@ -4,6 +4,10 @@ namespace Silk\Meta;
 
 use Illuminate\Support\Collection;
 
+/**
+ * @property-read string $type
+ * @property-read int $id
+ */
 class ObjectMeta
 {
     /**
@@ -19,9 +23,10 @@ class ObjectMeta
     protected $id;
 
     /**
-     * Create a new ObjectMeta instance
-     * @param string $type object type
-     * @param int    $id   object id
+     * ObjectMeta constructor.
+     *
+     * @param string $type Object type
+     * @param int    $id   Object ID
      */
     public function __construct($type, $id)
     {
@@ -30,11 +35,11 @@ class ObjectMeta
     }
 
     /**
-     * Get meta object for the key
+     * Get meta object for the key.
      *
      * @param  string $key  meta key
      *
-     * @return Silk\Models\Meta
+     * @return Meta
      */
     public function get($key)
     {
@@ -42,17 +47,20 @@ class ObjectMeta
     }
 
     /**
-     * Get all meta for the object as a Collection
+     * Get all meta for the object as a Collection.
      *
      * @return Collection
      */
     public function collect()
     {
-        return Collection::make($this->toArray());
+        return Collection::make($this->toArray())->map(function ($value, $key) {
+            return new Meta($this->type, $this->id, $key);
+        });
     }
 
     /**
-     * Get the representation of the instance as an array
+     * Get the representation of the instance as an array.
+     *
      * @return array
      */
     public function toArray()
@@ -61,13 +69,14 @@ class ObjectMeta
     }
 
     /**
-     * Get the single value for the given key
+     * Magic Getter.
      *
-     * @param  string $property meta key
-     * @return mixed            meta value
+     * @param  string $property Accessed property
+     *
+     * @return mixed
      */
     public function __get($property)
     {
-        return (new Meta($this->type, $this->id, $property))->get();
+        return isset($this->$property) ? $this->$property : null;
     }
 }

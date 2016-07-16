@@ -5,61 +5,59 @@ namespace Silk\Post;
 use stdClass;
 use WP_Post;
 use WP_Query;
-use Silk\Query\Builder;
-use Silk\Meta\ObjectMeta;
-use Silk\Exception\WP_ErrorException;
+use Illuminate\Support\Collection;
+use Silk\Type\Model as BaseModel;
+use Silk\PostType\PostType;
 use Silk\Post\Exception\PostNotFoundException;
 use Silk\Post\Exception\ModelPostTypeMismatchException;
 
 /**
- * @property-read $post
- * @property-read $id
- * All WP_Post properties are available via magic get/set on this instance
- * @property $ID
- * @property $comment_count
- * @property $comment_status
- * @property $filter
- * @property $guid
- * @property $menu_order
- * @property $ping_status
- * @property $pinged
- * @property $post_author
- * @property $post_content
- * @property $post_content_filtered
- * @property $post_date
- * @property $post_date_gmt
- * @property $post_excerpt
- * @property $post_mime_type
- * @property $post_modified
- * @property $post_modified_gmt
- * @property $post_name
- * @property $post_parent
- * @property $post_password
- * @property $post_status
- * @property $post_title
- * @property $post_type
- * @property $to_ping
+ * @property-read WP_Post $post
+ * @property-read int     $id
+ *
+ * @property int    $ID
+ * @property int    $comment_count
+ * @property string $comment_status
+ * @property string $filter
+ * @property string $guid
+ * @property int    $menu_order
+ * @property string $ping_status
+ * @property string $pinged
+ * @property int    $post_author
+ * @property string $post_content
+ * @property string $post_content_filtered
+ * @property string $post_date
+ * @property string $post_date_gmt
+ * @property string $post_excerpt
+ * @property string $post_mime_type
+ * @property string $post_modified
+ * @property string $post_modified_gmt
+ * @property string $post_name
+ * @property int    $post_parent
+ * @property string $post_password
+ * @property string $post_status
+ * @property string $post_title
+ * @property string $post_type
+ * @property string $to_ping
  */
-abstract class Model
+abstract class Model extends BaseModel
 {
-    /**
-     * The post
-     * @var WP_Post
-     */
-    protected $post;
-
-    /**
-     * Post ID
-     * @var int
-     */
-    protected $id;
-
     /**
      * The post type of the post this model wraps
      * @var string
      */
     const POST_TYPE = '';
 
+    /**
+     * The object type in WordPress
+     * @var string
+     */
+    const OBJECT_TYPE = 'post';
+
+    /**
+     * The primary ID property on the object
+     */
+    const ID_PROPERTY = 'ID';
 
     /**
      * Create a new instance
@@ -73,8 +71,7 @@ abstract class Model
             $post->post_type = static::postTypeId();
         }
 
-        $this->post = $post;
-        $this->id   = $post->ID;
+        $this->object = $post;
     }
 
     /**
@@ -153,13 +150,23 @@ abstract class Model
     public static function create($attributes = [])
     {
         $post = new WP_Post((object)
-            collect($attributes)
-                ->except('ID')
+            Collection::make($attributes)
+                ->except(static::ID_PROPERTY)
                 ->put('post_type', static::postTypeId())
                 ->all()
         );
 
         return static::fromWpPost($post)->save();
+    }
+
+    /**
+     * Get the post type identifier for this model.
+     *
+     * @return string
+     */
+    public static function typeId()
+    {
+        return static::postTypeId();
     }
 
     /**
@@ -181,24 +188,6 @@ abstract class Model
     public static function postType()
     {
         return PostType::make(static::postTypeId());
-    }
-
-    /**
-     * Meta API for this post
-     *
-     * @param  string $key  Meta key to retreive or empty to retreive all.
-     *
-     * @return object
-     */
-    public function meta($key = '')
-    {
-        $meta = new ObjectMeta('post', $this->id);
-
-        if ($key) {
-            return $meta->get($key);
-        }
-
-        return $meta;
     }
 
     /**
@@ -232,137 +221,26 @@ abstract class Model
     }
 
     /**
-     * Permanently deletes the post and related objects
-     *
-     * When the post and page is permanently deleted, everything that is
-     * tied to it is deleted also. This includes comments, post meta fields,
-     * and terms associated with the post.
-     *
-     * @return $this
-     */
-    public function delete()
-    {
-        if (wp_delete_post($this->id, true)) {
-            $this->refresh();
-        }
-
-        return $this;
-    }
-
-    /**
-     * Refresh the post object from cache/database
-     *
-     * @return $this
-     */
-    public function refresh()
-    {
-        $this->post = WP_Post::get_instance($this->id);
-
-        return $this;
-    }
-
-    /**
-     * Update the post in the database
-     *
-     * @return $this
-     */
-    public function save()
-    {
-        if (! $this->id) {
-            $result = wp_insert_post($this->post->to_array(), true);
-        } else {
-            $result = wp_update_post($this->post, true);
-        }
-
-        if (is_wp_error($result)) {
-            throw new WP_ErrorException($result);
-        }
-
-        $this->id = (int) $result;
-
-        return $this->refresh();
-    }
-
-    /**
      * Get a new query builder for the model.
      *
-     * @return Builder
+     * @return QueryBuilder
      */
     public function newQuery()
     {
-        return (new Builder(new WP_Query))->setModel($this);
+        return (new QueryBuilder(new WP_Query))->setModel($this);
     }
 
     /**
-     * Create a new query builder instance for this model type.
+     * Get the array of actions and their respective handler classes.
      *
-     * @return Builder
+     * @return array
      */
-    public static function query()
+    protected function actionClasses()
     {
-        return (new static)->newQuery();
+        return [
+            'save'   => Action\PostSaver::class,
+            'load'   => Action\PostLoader::class,
+            'delete' => Action\PostDeleter::class,
+        ];
     }
-
-    /**
-     * Magic getter
-     *
-     * @param  string $property
-     *
-     * @return mixed
-     */
-    public function __get($property)
-    {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        }
-
-        /**
-         * WP_Post translates non-existent properties to single post meta get
-         */
-        return $this->post->$property;
-    }
-
-    /**
-     * Magic setter
-     *
-     * @param string $property
-     * @param mixed $value
-     */
-    public function __set($property, $value)
-    {
-        if (isset($this->post->$property)) {
-            $this->post->$property = $value;
-        }
-    }
-
-    /**
-     * Handle dynamic static method calls on the model class.
-     *
-     * Proxies calls to direct method calls on a new instance
-     *
-     * @param string $method
-     * @param array $arguments
-     *
-     * @return mixed
-     */
-    public static function __callStatic($method, array $arguments)
-    {
-        return call_user_func_array([new static, $method], $arguments);
-    }
-
-    /**
-     * Handle dynamic method calls into the model.
-     *
-     * @param  string $method
-     * @param  array $arguments
-     *
-     * @return mixed
-     */
-    public function __call($method, $arguments)
-    {
-        $query = $this->newQuery();
-
-        return call_user_func_array([$query, $method], $arguments);
-    }
-
 }

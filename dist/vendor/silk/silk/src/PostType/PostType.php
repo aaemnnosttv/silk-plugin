@@ -1,35 +1,28 @@
 <?php
 
-namespace Silk\Post;
+namespace Silk\PostType;
 
 use stdClass;
-use InvalidArgumentException;
+use Silk\Type\Type;
 use Illuminate\Support\Collection;
 use Silk\Exception\WP_ErrorException;
-use Silk\Post\Exception\InvalidPostTypeNameException;
-use Silk\Post\Exception\NonExistentPostTypeException;
-use Silk\Post\PostTypeBuilder;
+use Silk\PostType\Exception\NonExistentPostTypeException;
 
-/**
- * @property-read string $slug
- * @property-read string $one
- * @property-read string $many
- */
-class PostType
+class PostType extends Type
 {
-    /**
-     * Post type object
-     * @var stdClass
-     */
-    protected $object;
-
     /**
      * PostType Constructor
      *
      * @param stdClass $object  The WordPress post type object
+     *
+     * @throws \InvalidArgumentException
      */
-    public function __construct(stdClass $object)
+    public function __construct($object)
     {
+        if (! is_object($object) || ! in_array(get_class($object), ['stdClass', 'WP_Post_Type'])) {
+            throw new \InvalidArgumentException(static::class . ' can only be constructed with a Post Type object.');
+        }
+
         $this->object = $object;
     }
 
@@ -38,10 +31,10 @@ class PostType
      *
      * Loads an existing type, or returns a new builder for registering a new type.
      *
-     * @param  string $slug  The post type slug
+     * @param  string $slug    The post type slug
      *
-     * @return static|PostTypeBuilder  If the post type has been registered, a new static instance is returned.
-     *                                 Otherwise a new PostTypeBuilder is created for building a new post type to register.
+     * @return static|Builder  If the post type has been registered, a new static instance is returned.
+     *                         Otherwise a new Builder is created for building a new post type to register.
      */
     public static function make($slug)
     {
@@ -49,7 +42,7 @@ class PostType
             return static::load($slug);
         }
 
-        return new PostTypeBuilder($slug);
+        return new Builder($slug);
     }
 
     /**
@@ -81,20 +74,10 @@ class PostType
     }
 
     /**
-     * Get the post type object.
-     *
-     * @return object
-     */
-    public function object()
-    {
-        return $this->object;
-    }
-
-    /**
      * Check for feature support.
      *
-     * @param string,...|array $features  string - First feature of possible many,
-     *                                    array - Many features to check support for.
+     * @param string|array $features  string - First feature of possible many,
+     *                                array - Many features to check support for.
      *
      * @return mixed
      */
@@ -104,7 +87,7 @@ class PostType
             $features = func_get_args();
         }
 
-        return ! collect($features)
+        return ! Collection::make($features)
             ->contains(function ($key, $feature) {
                 return ! post_type_supports($this->slug, $feature);
             });
@@ -113,8 +96,10 @@ class PostType
     /**
      * Register support of certain features for an existing post type.
      *
-     * @param mixed $features  string - single feature to add
+     * @param mixed $features string - single feature to add
      *                        array - multiple features to add
+     *
+     * @return $this
      */
     public function addSupportFor($features)
     {
@@ -126,12 +111,14 @@ class PostType
     /**
      * Deregister support of certain features for an existing post type.
      *
-     * @param mixed $features  string - single feature to remove
+     * @param mixed $features string - single feature to remove
      *                        array - multiple features to remove
+     *
+     * @return $this
      */
     public function removeSupportFor($features)
     {
-        collect(is_array($features) ? $features : func_get_args())
+        Collection::make(is_array($features) ? $features : func_get_args())
             ->each(function ($features) {
                 remove_post_type_support($this->slug, $features);
             });
@@ -142,6 +129,9 @@ class PostType
     /**
      * Unregister the post type
      *
+     * @throws NonExistentPostTypeException
+     * @throws WP_ErrorException
+     *
      * @return $this
      */
     public function unregister()
@@ -150,33 +140,10 @@ class PostType
             throw new NonExistentPostTypeException("No post type exists with name '{$this->slug}'.");
         }
 
-        $result = unregister_post_type($this->slug);
-
-        if (is_wp_error($result)) {
-            throw new WP_ErrorException($result);
+        if (is_wp_error($error = unregister_post_type($this->slug))) {
+            throw new WP_ErrorException($error);
         }
 
         return $this;
-    }
-
-    /**
-     * Magic Getter
-     *
-     * @param  string $property
-     *
-     * @return mixed
-     */
-    public function __get($property)
-    {
-        switch ($property) :
-            case 'slug':
-                return $this->object->name;
-            case 'one':
-                return $this->object->labels->singular_name;
-            case 'many':
-                return $this->object->labels->name;
-        endswitch;
-
-        return null;
     }
 }
