@@ -1,13 +1,12 @@
 <?php
 
-namespace Silk\Query;
+namespace Silk\Post;
 
 use WP_Query;
-use Silk\Post\Post;
-use Silk\Post\Model;
 use Illuminate\Support\Collection;
+use Silk\Contracts\BuildsQueries;
 
-class Builder
+class QueryBuilder implements BuildsQueries
 {
     /**
      * WP_Query instance
@@ -50,7 +49,7 @@ class Builder
 
     /**
      * Return an unlimited number of results.
-     * 
+     *
      * @return $this
      */
     public function all()
@@ -111,7 +110,7 @@ class Builder
             return $this->collectModels();
         }
 
-        return collect($this->query->get_posts());
+        return Collection::make($this->query->get_posts());
     }
 
     /**
@@ -125,7 +124,7 @@ class Builder
         $this->query->set('fields', ''); // as WP_Post objects
         $modelClass = get_class($this->model);
 
-        return collect($this->query->get_posts())
+        return Collection::make($this->query->get_posts())
             ->map(function ($post) use ($modelClass) {
                 return new $modelClass($post);
             });
@@ -134,8 +133,8 @@ class Builder
     /**
      * Set a query variable on the query
      *
-     * @param [type] $var   [description]
-     * @param [type] $value [description]
+     * @param string $var   Query variable key
+     * @param mixed  $value Query value for key
      *
      * @return $this
      */

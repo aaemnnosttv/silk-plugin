@@ -11,11 +11,13 @@ abstract class Shortcode
      * @var array
      */
     protected $attributes;
+
     /**
      * The enclosed content within the shortcode
      * @var string
      */
     protected $content;
+    
     /**
      * The shortcode tag that was called
      * @var string
@@ -61,10 +63,10 @@ abstract class Shortcode
     }
 
     /**
-    * Call the shortcode's handler and return the output.
-    *
-    * @return mixed  Rendered shortcode output
-    */
+     * Call the shortcode's handler and return the output.
+     *
+     * @return mixed  Rendered shortcode output
+     */
     public function render()
     {
         $dedicated_method = "{$this->tag}_handler";
