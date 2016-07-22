@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd9b491a3ed74519a450b68c0840db540
+class ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2
 {
     public static $files = array (
         '7ba3c774c30c8399e359b5ff7f3b943e' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/helpers.php',
@@ -51,6 +51,7 @@ class ComposerStaticInitd9b491a3ed74519a450b68c0840db540
         'Silk\\PostType\\Exception\\InvalidPostTypeNameException' => __DIR__ . '/..' . '/silk/silk/src/PostType/Exception/InvalidPostTypeNameException.php',
         'Silk\\PostType\\Exception\\NonExistentPostTypeException' => __DIR__ . '/..' . '/silk/silk/src/PostType/Exception/NonExistentPostTypeException.php',
         'Silk\\PostType\\PostType' => __DIR__ . '/..' . '/silk/silk/src/PostType/PostType.php',
+        'Silk\\Post\\Action\\Action' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/Action.php',
         'Silk\\Post\\Action\\PostDeleter' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/PostDeleter.php',
         'Silk\\Post\\Action\\PostLoader' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/PostLoader.php',
         'Silk\\Post\\Action\\PostSaver' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/PostSaver.php',
@@ -65,6 +66,7 @@ class ComposerStaticInitd9b491a3ed74519a450b68c0840db540
         'Silk\\Taxonomy\\Exception\\InvalidTaxonomyNameException' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Exception/InvalidTaxonomyNameException.php',
         'Silk\\Taxonomy\\Exception\\NonExistentTaxonomyException' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Exception/NonExistentTaxonomyException.php',
         'Silk\\Taxonomy\\Taxonomy' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Taxonomy.php',
+        'Silk\\Term\\Action\\Action' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/Action.php',
         'Silk\\Term\\Action\\TermDeleter' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/TermDeleter.php',
         'Silk\\Term\\Action\\TermLoader' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/TermLoader.php',
         'Silk\\Term\\Action\\TermSaver' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/TermSaver.php',
@@ -91,9 +93,9 @@ class ComposerStaticInitd9b491a3ed74519a450b68c0840db540
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd9b491a3ed74519a450b68c0840db540::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd9b491a3ed74519a450b68c0840db540::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd9b491a3ed74519a450b68c0840db540::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2::$classMap;
 
         }, null, ClassLoader::class);
     }
