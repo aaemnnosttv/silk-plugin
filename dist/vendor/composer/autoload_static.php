@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2
+class ComposerStaticInit029b01548e86461ae01491c964bddcb1
 {
     public static $files = array (
         '7ba3c774c30c8399e359b5ff7f3b943e' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/helpers.php',
@@ -39,10 +39,8 @@ class ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2
         'Illuminate\\Support\\Arr' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Arr.php',
         'Illuminate\\Support\\Collection' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Collection.php',
         'Illuminate\\Support\\Traits\\Macroable' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Traits/Macroable.php',
-        'Silk\\Contracts\\BuildsQueries' => __DIR__ . '/..' . '/silk/silk/src/Contracts/BuildsQueries.php',
-        'Silk\\Contracts\\Executable' => __DIR__ . '/..' . '/silk/silk/src/Contracts/Executable.php',
-        'Silk\\Database\\Action' => __DIR__ . '/..' . '/silk/silk/src/Database/Action.php',
-        'Silk\\Database\\NullAction' => __DIR__ . '/..' . '/silk/silk/src/Database/NullAction.php',
+        'Silk\\Contracts\\Query\\BuildsQueries' => __DIR__ . '/..' . '/silk/silk/src/Contracts/Query/BuildsQueries.php',
+        'Silk\\Contracts\\Type\\Registerable' => __DIR__ . '/..' . '/silk/silk/src/Contracts/Type/Registerable.php',
         'Silk\\Event\\Hook' => __DIR__ . '/..' . '/silk/silk/src/Event/Hook.php',
         'Silk\\Exception\\WP_ErrorException' => __DIR__ . '/..' . '/silk/silk/src/Exception/WP_ErrorException.php',
         'Silk\\Meta\\Meta' => __DIR__ . '/..' . '/silk/silk/src/Meta/Meta.php',
@@ -51,25 +49,18 @@ class ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2
         'Silk\\PostType\\Exception\\InvalidPostTypeNameException' => __DIR__ . '/..' . '/silk/silk/src/PostType/Exception/InvalidPostTypeNameException.php',
         'Silk\\PostType\\Exception\\NonExistentPostTypeException' => __DIR__ . '/..' . '/silk/silk/src/PostType/Exception/NonExistentPostTypeException.php',
         'Silk\\PostType\\PostType' => __DIR__ . '/..' . '/silk/silk/src/PostType/PostType.php',
-        'Silk\\Post\\Action\\Action' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/Action.php',
-        'Silk\\Post\\Action\\PostDeleter' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/PostDeleter.php',
-        'Silk\\Post\\Action\\PostLoader' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/PostLoader.php',
-        'Silk\\Post\\Action\\PostSaver' => __DIR__ . '/..' . '/silk/silk/src/Post/Action/PostSaver.php',
         'Silk\\Post\\ClassNameAsPostType' => __DIR__ . '/..' . '/silk/silk/src/Post/ClassNameAsPostType.php',
         'Silk\\Post\\Exception\\ModelPostTypeMismatchException' => __DIR__ . '/..' . '/silk/silk/src/Post/Exception/ModelPostTypeMismatchException.php',
         'Silk\\Post\\Exception\\PostNotFoundException' => __DIR__ . '/..' . '/silk/silk/src/Post/Exception/PostNotFoundException.php',
         'Silk\\Post\\Model' => __DIR__ . '/..' . '/silk/silk/src/Post/Model.php',
         'Silk\\Post\\QueryBuilder' => __DIR__ . '/..' . '/silk/silk/src/Post/QueryBuilder.php',
+        'Silk\\Query\\Builder' => __DIR__ . '/..' . '/silk/silk/src/Query/Builder.php',
         'Silk\\Support\\Callback' => __DIR__ . '/..' . '/silk/silk/src/Support/Callback.php',
         'Silk\\Support\\Shortcode' => __DIR__ . '/..' . '/silk/silk/src/Support/Shortcode.php',
         'Silk\\Taxonomy\\Builder' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Builder.php',
         'Silk\\Taxonomy\\Exception\\InvalidTaxonomyNameException' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Exception/InvalidTaxonomyNameException.php',
         'Silk\\Taxonomy\\Exception\\NonExistentTaxonomyException' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Exception/NonExistentTaxonomyException.php',
         'Silk\\Taxonomy\\Taxonomy' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Taxonomy.php',
-        'Silk\\Term\\Action\\Action' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/Action.php',
-        'Silk\\Term\\Action\\TermDeleter' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/TermDeleter.php',
-        'Silk\\Term\\Action\\TermLoader' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/TermLoader.php',
-        'Silk\\Term\\Action\\TermSaver' => __DIR__ . '/..' . '/silk/silk/src/Term/Action/TermSaver.php',
         'Silk\\Term\\Exception\\TaxonomyMismatchException' => __DIR__ . '/..' . '/silk/silk/src/Term/Exception/TaxonomyMismatchException.php',
         'Silk\\Term\\Exception\\TermNotFoundException' => __DIR__ . '/..' . '/silk/silk/src/Term/Exception/TermNotFoundException.php',
         'Silk\\Term\\Model' => __DIR__ . '/..' . '/silk/silk/src/Term/Model.php',
@@ -77,7 +68,11 @@ class ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2
         'Silk\\Type\\Builder' => __DIR__ . '/..' . '/silk/silk/src/Type/Builder.php',
         'Silk\\Type\\Labels' => __DIR__ . '/..' . '/silk/silk/src/Type/Labels.php',
         'Silk\\Type\\Model' => __DIR__ . '/..' . '/silk/silk/src/Type/Model.php',
+        'Silk\\Type\\ObjectAliases' => __DIR__ . '/..' . '/silk/silk/src/Type/ObjectAliases.php',
+        'Silk\\Type\\ShorthandProperties' => __DIR__ . '/..' . '/silk/silk/src/Type/ShorthandProperties.php',
         'Silk\\Type\\Type' => __DIR__ . '/..' . '/silk/silk/src/Type/Type.php',
+        'Silk\\User\\Model' => __DIR__ . '/..' . '/silk/silk/src/User/Model.php',
+        'Silk\\User\\QueryBuilder' => __DIR__ . '/..' . '/silk/silk/src/User/QueryBuilder.php',
         'Silk\\WordPress\\Post\\Attachment' => __DIR__ . '/..' . '/silk/silk/src/WordPress/Post/Attachment.php',
         'Silk\\WordPress\\Post\\NavMenuItem' => __DIR__ . '/..' . '/silk/silk/src/WordPress/Post/NavMenuItem.php',
         'Silk\\WordPress\\Post\\Page' => __DIR__ . '/..' . '/silk/silk/src/WordPress/Post/Page.php',
@@ -88,14 +83,15 @@ class ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2
         'Silk\\WordPress\\Term\\NavMenu' => __DIR__ . '/..' . '/silk/silk/src/WordPress/Term/NavMenu.php',
         'Silk\\WordPress\\Term\\PostFormat' => __DIR__ . '/..' . '/silk/silk/src/WordPress/Term/PostFormat.php',
         'Silk\\WordPress\\Term\\Tag' => __DIR__ . '/..' . '/silk/silk/src/WordPress/Term/Tag.php',
+        'Silk\\WordPress\\User\\User' => __DIR__ . '/..' . '/silk/silk/src/WordPress/User/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5b5154a3491ce107f21e10c9c93972c2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit029b01548e86461ae01491c964bddcb1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit029b01548e86461ae01491c964bddcb1::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit029b01548e86461ae01491c964bddcb1::$classMap;
 
         }, null, ClassLoader::class);
     }
