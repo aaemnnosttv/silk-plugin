@@ -1,27 +1,22 @@
 <?php
 
-use Silk\Taxonomy\Taxonomy;
 use Silk\Term\QueryBuilder;
 use Silk\WordPress\Term\Category;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 
 class TermQueryBuilderTest extends WP_UnitTestCase
 {
     use TermFactoryHelpers;
 
-    /**
-     * @test
-     */
-    public function it_returns_the_results_as_a_collection()
+    /** @test */
+    function it_returns_the_results_as_a_collection()
     {
         $query = new QueryBuilder;
 
         $this->assertInstanceOf(Collection::class, $query->results());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_can_limit_the_results_to_a_given_taxonomy()
     {
         /**
@@ -29,7 +24,7 @@ class TermQueryBuilderTest extends WP_UnitTestCase
          *
          * We will limit the query to tags, but to be sure, assign all terms to a post.
          */
-        $post_id = $this->factory->post->create();
+        $post_id = $this->factory()->post->create();
         $this->createManyTagsForPost(3, $post_id);
         $this->createManyCatsForPost(3, $post_id);
 
@@ -41,12 +36,10 @@ class TermQueryBuilderTest extends WP_UnitTestCase
         $this->assertSame(['post_tag','post_tag','post_tag'], $results->pluck('taxonomy')->all());
     }
 
-    /**
-     * @test
-     */
-    public function it_can_include_unattached_terms()
+    /** @test */
+    function it_can_include_unattached_terms()
     {
-        $post_id = $this->factory->post->create();
+        $post_id = $this->factory()->post->create();
         $this->createManyTags(3); // empties
         $this->createManyTagsForPost(3, $post_id); // assigned
 
@@ -59,12 +52,10 @@ class TermQueryBuilderTest extends WP_UnitTestCase
         $this->assertCount(6, $results);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_query_all_terms()
+    /** @test */
+    function it_can_query_all_terms()
     {
-        $post_id = $this->factory->post->create();
+        $post_id = $this->factory()->post->create();
 
         $this->createManyTags(2); // empties
         $this->createManyTagsForPost(3, $post_id); // assigned
@@ -83,11 +74,8 @@ class TermQueryBuilderTest extends WP_UnitTestCase
         $this->assertCount(2 + 3 + 4 + 5 + 1, $alls);
     }
 
-
-    /**
-     * @test
-     */
-    public function it_can_limit_the_maximum_number_of_results_to_a_given_number()
+    /** @test */
+    function it_can_limit_the_maximum_number_of_results_to_a_given_number()
     {
         $this->createManyTags(7);
 
@@ -102,17 +90,15 @@ class TermQueryBuilderTest extends WP_UnitTestCase
      * @test
      * @expectedException Silk\Exception\WP_ErrorException
      */
-    public function it_blows_up_if_trying_to_query_terms_of_a_non_taxonomy()
+    function it_blows_up_if_trying_to_query_terms_of_a_non_taxonomy()
     {
         (new QueryBuilder)
             ->forTaxonomy('non-existent')
             ->results();
     }
 
-    /**
-     * @test
-     */
-    public function it_can_accept_and_return_a_model()
+    /** @test */
+    function it_can_accept_and_return_a_model()
     {
         $model = new Category;
         $builder = (new QueryBuilder)->setModel($model);

@@ -5,7 +5,7 @@
  * Author: Evan Mattson
  * Author URI: https://aaemnnost.tv/
  *
- * Version: 0.11.0
+ * Version: 0.12.0
  *
  * GitHub Plugin URI: aaemnnosttv/silk-plugin
  * Requires PHP: 5.6

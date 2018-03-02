@@ -2,28 +2,24 @@
 
 use Silk\Meta\Meta;
 use Silk\Meta\ObjectMeta;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 
 class ObjectMetaTest extends WP_UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function it_can_get_a_dedicated_meta_object_for_a_given_key()
+    /** @test */
+    function it_can_get_a_dedicated_meta_object_for_a_given_key()
     {
-        $post_id = $this->factory->post->create();
+        $post_id = $this->factory()->post->create();
 
         $postMeta = new ObjectMeta('post', $post_id);
 
         $this->assertInstanceOf(Meta::class, $postMeta->get('some_meta_key'));
     }
 
-    /**
-     * @test
-     */
-    public function it_can_return_all_meta_as_a_collection()
+    /** @test */
+    function it_can_return_all_meta_as_a_collection()
     {
-        $post_id = $this->factory->post->create();
+        $post_id = $this->factory()->post->create();
 
         $meta = new ObjectMeta('post', $post_id);
 
@@ -34,10 +30,8 @@ class ObjectMetaTest extends WP_UnitTestCase
         }
     }
 
-    /**
-     * @test
-     */
-    public function it_can_return_all_meta_as_an_array()
+    /** @test */
+    function it_can_return_all_meta_as_an_array()
     {
         /**
          * Use a made up post ID so that we can be sure these are the only meta values.
@@ -53,14 +47,12 @@ class ObjectMetaTest extends WP_UnitTestCase
                 'a' => ['1'],
                 'b' => ['2']
             ],
-            get_metadata('post', $post_id)
+            $meta->toArray()
         );
     }
 
-    /**
-     * @test
-     */
-    public function it_has_readonly_properties()
+    /** @test */
+    function it_has_readonly_properties()
     {
         $meta = new ObjectMeta('post', 123);
 
@@ -70,10 +62,8 @@ class ObjectMetaTest extends WP_UnitTestCase
         $this->assertNull($meta->non_existent);
     }
 
-    /**
-     * @test
-     */
-    public function it_has_a_fluent_setter()
+    /** @test */
+    function it_has_a_fluent_setter()
     {
         $meta = new ObjectMeta('post', 123);
 

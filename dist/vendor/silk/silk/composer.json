@@ -16,17 +16,25 @@
     },
     "license": "MIT",
     "require": {
-        "php": "^5.5 | ^7.0",
-        "tightenco/collect": "^5.2"
+        "php": ">=5.6",
+        "tightenco/collect": "^5.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8",
+        "phpunit/phpunit": "^5.0",
         "mockery/mockery": "^0.9.5",
-        "satooshi/php-coveralls": "^1.0",
-        "johnpbloch/wordpress": "^4.5"
+        "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
         "psr-4": {"Silk\\":"src"},
         "files": ["src/functions.php"]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/src"
+        ]
+    },
+    "scripts": {
+        "test": "phpunit",
+        "coverage": "coveralls"
     }
 }

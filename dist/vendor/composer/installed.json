@@ -1,27 +1,75 @@
 [
     {
-        "name": "tightenco/collect",
-        "version": "v5.2.43",
-        "version_normalized": "5.2.43.0",
+        "name": "silk/silk",
+        "version": "v0.12.0",
+        "version_normalized": "0.12.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/tightenco/collect.git",
-            "reference": "6add72fba3816232c71a3338081ed8cbef41974d"
+            "url": "https://github.com/aaemnnosttv/silk.git",
+            "reference": "402243de63b225d4dafa666d16d9db28fb24799f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tightenco/collect/zipball/6add72fba3816232c71a3338081ed8cbef41974d",
-            "reference": "6add72fba3816232c71a3338081ed8cbef41974d",
+            "url": "https://api.github.com/repos/aaemnnosttv/silk/zipball/402243de63b225d4dafa666d16d9db28fb24799f",
+            "reference": "402243de63b225d4dafa666d16d9db28fb24799f",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.5.9"
+            "php": ">=5.6",
+            "tightenco/collect": "^5.4"
         },
         "require-dev": {
-            "mockery/mockery": "~0.9.4",
-            "phpunit/phpunit": "~4.1"
+            "mockery/mockery": "^0.9.5",
+            "phpunit/phpunit": "^5.0",
+            "satooshi/php-coveralls": "^1.0"
         },
-        "time": "2016-08-10 15:40:20",
+        "time": "2018-03-02T22:22:03+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Silk\\": "src"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Evan Mattson",
+                "email": "me@aaemnnost.tv",
+                "homepage": "https://aaemnnost.tv"
+            }
+        ],
+        "description": "A modern API for WordPress"
+    },
+    {
+        "name": "tightenco/collect",
+        "version": "v5.4.33",
+        "version_normalized": "5.4.33.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tightenco/collect.git",
+            "reference": "73aa38b20d932f5e8f8ccf721e4c27f4304783d6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tightenco/collect/zipball/73aa38b20d932f5e8f8ccf721e4c27f4304783d6",
+            "reference": "73aa38b20d932f5e8f8ccf721e4c27f4304783d6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.4"
+        },
+        "require-dev": {
+            "mockery/mockery": "^0.9.7",
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-08-14T20:47:19+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -47,54 +95,5 @@
             "collection",
             "laravel"
         ]
-    },
-    {
-        "name": "silk/silk",
-        "version": "v0.11.0",
-        "version_normalized": "0.11.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/aaemnnosttv/silk.git",
-            "reference": "93ecd05834882c9354de9c1fb18ad155f5d62c02"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/aaemnnosttv/silk/zipball/93ecd05834882c9354de9c1fb18ad155f5d62c02",
-            "reference": "93ecd05834882c9354de9c1fb18ad155f5d62c02",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5 | ^7.0",
-            "tightenco/collect": "^5.2"
-        },
-        "require-dev": {
-            "johnpbloch/wordpress": "^4.5",
-            "mockery/mockery": "^0.9.5",
-            "phpunit/phpunit": "^4.8",
-            "satooshi/php-coveralls": "^1.0"
-        },
-        "time": "2016-08-18 13:17:21",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Silk\\": "src"
-            },
-            "files": [
-                "src/functions.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Evan Mattson",
-                "email": "me@aaemnnost.tv",
-                "homepage": "https://aaemnnost.tv"
-            }
-        ],
-        "description": "A modern API for WordPress"
     }
 ]

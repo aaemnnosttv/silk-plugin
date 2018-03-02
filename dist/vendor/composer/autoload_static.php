@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit029b01548e86461ae01491c964bddcb1
+class ComposerStaticInit1d8e831433d1bb06c82a4180bcd9117a
 {
     public static $files = array (
         '7ba3c774c30c8399e359b5ff7f3b943e' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/helpers.php',
@@ -38,8 +38,8 @@ class ComposerStaticInit029b01548e86461ae01491c964bddcb1
         'Illuminate\\Contracts\\Support\\Jsonable' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Contracts/Support/Jsonable.php',
         'Illuminate\\Support\\Arr' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Arr.php',
         'Illuminate\\Support\\Collection' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Collection.php',
+        'Illuminate\\Support\\HigherOrderCollectionProxy' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/HigherOrderCollectionProxy.php',
         'Illuminate\\Support\\Traits\\Macroable' => __DIR__ . '/..' . '/tightenco/collect/src/Illuminate/Support/Traits/Macroable.php',
-        'Silk\\Contracts\\Query\\BuildsQueries' => __DIR__ . '/..' . '/silk/silk/src/Contracts/Query/BuildsQueries.php',
         'Silk\\Contracts\\Type\\Registerable' => __DIR__ . '/..' . '/silk/silk/src/Contracts/Type/Registerable.php',
         'Silk\\Event\\Hook' => __DIR__ . '/..' . '/silk/silk/src/Event/Hook.php',
         'Silk\\Exception\\WP_ErrorException' => __DIR__ . '/..' . '/silk/silk/src/Exception/WP_ErrorException.php',
@@ -55,7 +55,9 @@ class ComposerStaticInit029b01548e86461ae01491c964bddcb1
         'Silk\\Post\\Model' => __DIR__ . '/..' . '/silk/silk/src/Post/Model.php',
         'Silk\\Post\\QueryBuilder' => __DIR__ . '/..' . '/silk/silk/src/Post/QueryBuilder.php',
         'Silk\\Query\\Builder' => __DIR__ . '/..' . '/silk/silk/src/Query/Builder.php',
+        'Silk\\Silk' => __DIR__ . '/..' . '/silk/silk/src/Silk.php',
         'Silk\\Support\\Callback' => __DIR__ . '/..' . '/silk/silk/src/Support/Callback.php',
+        'Silk\\Support\\Collection' => __DIR__ . '/..' . '/silk/silk/src/Support/Collection.php',
         'Silk\\Support\\Shortcode' => __DIR__ . '/..' . '/silk/silk/src/Support/Shortcode.php',
         'Silk\\Taxonomy\\Builder' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Builder.php',
         'Silk\\Taxonomy\\Exception\\InvalidTaxonomyNameException' => __DIR__ . '/..' . '/silk/silk/src/Taxonomy/Exception/InvalidTaxonomyNameException.php',
@@ -89,9 +91,9 @@ class ComposerStaticInit029b01548e86461ae01491c964bddcb1
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit029b01548e86461ae01491c964bddcb1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit029b01548e86461ae01491c964bddcb1::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit029b01548e86461ae01491c964bddcb1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1d8e831433d1bb06c82a4180bcd9117a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1d8e831433d1bb06c82a4180bcd9117a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1d8e831433d1bb06c82a4180bcd9117a::$classMap;
 
         }, null, ClassLoader::class);
     }

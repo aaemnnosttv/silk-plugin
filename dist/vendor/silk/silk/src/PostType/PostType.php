@@ -5,7 +5,7 @@ namespace Silk\PostType;
 use stdClass;
 use Silk\Type\Type;
 use Silk\Contracts\Type\Registerable;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 use Silk\Exception\WP_ErrorException;
 use Silk\PostType\Exception\NonExistentPostTypeException;
 
@@ -110,7 +110,7 @@ class PostType extends Type implements Registerable
         }
 
         return ! Collection::make($features)
-            ->contains(function ($key, $feature) {
+            ->contains(function ($feature) {
                 return ! post_type_supports($this->id(), $feature);
             });
     }
