@@ -3,14 +3,9 @@
 namespace Silk\Query;
 
 use Silk\Type\Model;
-use Silk\Contracts\Query\BuildsQueries;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 
-/**
- * @property-read object $query
- * @property-read Model  $model
- */
-abstract class Builder implements BuildsQueries
+abstract class Builder
 {
     /**
      * The query instance
@@ -81,5 +76,32 @@ abstract class Builder implements BuildsQueries
     public function getModel()
     {
         return $this->model;
+    }
+
+    /**
+     * Get the query object.
+     *
+     * @return object
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * Handle dynamic method calls on the builder.
+     *
+     * @param string $name      Method name
+     * @param array  $arguments
+     *
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if (method_exists($this->model, 'scope' . ucfirst($name))) {
+            return $this->model->{'scope' . ucfirst($name)}($this, ...$arguments);
+        }
+
+        throw new \BadMethodCallException("No '$name' method exists on " . static::class);
     }
 }

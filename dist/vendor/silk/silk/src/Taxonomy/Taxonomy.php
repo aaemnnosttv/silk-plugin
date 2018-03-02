@@ -7,7 +7,7 @@ use Silk\Type\Type;
 use Silk\Contracts\Type\Registerable;
 use Silk\PostType\PostType;
 use Silk\Term\QueryBuilder;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 use Silk\Exception\WP_ErrorException;
 use Silk\Taxonomy\Exception\InvalidTaxonomyNameException;
 use Silk\Taxonomy\Exception\NonExistentTaxonomyException;
@@ -57,6 +57,7 @@ class Taxonomy extends Type implements Registerable
      *
      * @param  string $id Taxonomy name/identifier
      *
+     * @throws NonExistentTaxonomyException
      * @throws InvalidTaxonomyNameException
      *
      * @return static|Builder

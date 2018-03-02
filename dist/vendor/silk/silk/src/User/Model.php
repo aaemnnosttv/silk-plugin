@@ -4,7 +4,7 @@ namespace Silk\User;
 
 use WP_User;
 use Silk\Type\Model as BaseModel;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 use Silk\Exception\WP_ErrorException;
 use Silk\User\Exception\UserNotFoundException;
 
@@ -36,6 +36,22 @@ class Model extends BaseModel
         $this->object = $this->normalizeData($user);
 
         $this->fill($attributes);
+    }
+
+    /**
+     * Retrieve a new instance by the ID.
+     *
+     * @param int|string $id Primary ID
+     *
+     * @return null|static
+     */
+    public static function find($id)
+    {
+        try {
+            return static::fromID($id);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**
@@ -131,10 +147,10 @@ class Model extends BaseModel
     }
 
     /**
-    * Get a new query builder for the model.
-    *
-    * @return \Silk\Contracts\Query\BuildsQueries
-    */
+     * Get a new query builder for the model.
+     *
+     * @return QueryBuilder
+     */
     public function newQuery()
     {
         return QueryBuilder::make()->setModel($this);

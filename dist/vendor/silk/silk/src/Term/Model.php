@@ -6,7 +6,7 @@ use stdClass;
 use WP_Term;
 use Silk\Taxonomy\Taxonomy;
 use Silk\Type\Model as BaseModel;
-use Illuminate\Support\Collection;
+use Silk\Support\Collection;
 use Silk\Exception\WP_ErrorException;
 use Silk\Term\Exception\TermNotFoundException;
 use Silk\Term\Exception\TaxonomyMismatchException;
@@ -66,16 +66,19 @@ abstract class Model extends BaseModel
     }
 
     /**
-     * Create a new instance from a WP_Term object.
-     * @deprecated - use static::make()
+     * Retrieve a new instance by the ID.
      *
-     * @param  WP_Term $term [description]
+     * @param int|string $id Primary ID
      *
-     * @return static
+     * @return null|static
      */
-    public static function fromWpTerm(WP_Term $term)
+    public static function find($id)
     {
-        return new static($term);
+        try {
+            return static::fromID($id);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

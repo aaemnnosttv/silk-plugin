@@ -5,9 +5,7 @@ use Silk\PostType\Builder;
 
 class PostModelTest extends WP_UnitTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     function it_has_a_method_for_getting_the_post_type_id()
     {
         $this->assertSame('event', ModelTestEvent::postTypeId());
@@ -16,36 +14,28 @@ class PostModelTest extends WP_UnitTestCase
         $this->assertSame('dinosaur', Dinosaur::postTypeId());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_has_a_method_for_getting_the_post_type_api()
     {
         $this->assertInstanceOf(Builder::class, Dinosaur::postType());
     }
 
-    /**
-    * @test
-    */
-    public function it_has_a_named_constructor_to_make_a_new_instance()
+    /** @test */
+    function it_has_a_named_constructor_to_make_a_new_instance()
     {
         $this->assertInstanceOf(Dinosaur::class, Dinosaur::make());
     }
 
-    /**
-    * @test
-    */
-    public function the_make_method_passes_its_arguments_to_the_constructor()
+    /** @test */
+    function the_make_method_passes_its_arguments_to_the_constructor()
     {
-        $wp_post = $this->factory->post->create_and_get(['post_type' => 'event']);
+        $wp_post = $this->factory()->post->create_and_get(['post_type' => 'event']);
         $model = ModelTestEvent::make($wp_post);
 
         $this->assertSame($wp_post, $model->object);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_can_create_a_new_post_with_shorthand_attributes()
     {
         $model = ModelTestShorthand::create([
@@ -63,9 +53,7 @@ class PostModelTest extends WP_UnitTestCase
         $this->assertSame('Some content', $post->post_content);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_has_models_for_all_builtin_post_types()
     {
         $this->assertSame('attachment'      , \Silk\WordPress\Post\Attachment::postTypeId());

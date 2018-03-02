@@ -4,10 +4,8 @@ use Silk\Event\Hook;
 
 class HookTest extends WP_UnitTestCase
 {
-    /**
-     * @test
-     */
-    public function an_instance_can_be_created_with_just_a_handle()
+    /** @test */
+    function an_instance_can_be_created_with_just_a_handle()
     {
         $hook = Hook::on('init');
         $easy = on('init', function () {});
@@ -16,10 +14,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertInstanceOf(Hook::class, $easy);
     }
 
-    /**
-     * @test
-     */
-    public function it_uses_a_fluent_api()
+    /** @test */
+    function it_uses_a_fluent_api()
     {
         $hook = Hook::on('asdf')
             ->setCallback(function () {})
@@ -30,10 +26,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertInstanceOf(Hook::class, $hook);
     }
 
-    /**
-     * @test
-     */
-    public function it_calls_the_callback_we_give_it()
+    /** @test */
+    function it_calls_the_callback_we_give_it()
     {
         $data = '';
 
@@ -61,10 +55,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertEquals($data, 'yo');
     }
 
-    /**
-     * @test
-     */
-    public function it_listens_on_the_priority_we_set()
+    /** @test */
+    function it_listens_on_the_priority_we_set()
     {
         $data = 'this is passed by reference to the callback';
 
@@ -92,10 +84,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertEquals(5, $data);
     }
 
-    /**
-     * @test
-     */
-    public function it_passes_the_correct_number_of_arguments_to_the_callback_automatically()
+    /** @test */
+    function it_passes_the_correct_number_of_arguments_to_the_callback_automatically()
     {
         $arguments_count = null;
 
@@ -119,10 +109,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertEquals(2, $arguments_count);
     }
 
-    /**
-     * @test
-     */
-    public function it_passes_all_arguments_to_a_callback_that_has_no_parameters()
+    /** @test */
+    function it_passes_all_arguments_to_a_callback_that_has_no_parameters()
     {
         $passed = 0;
         Hook::on('test_all_arguments_passed')
@@ -136,10 +124,8 @@ class HookTest extends WP_UnitTestCase
     }
 
 
-    /**
-     * @test
-     */
-    public function it_can_limit_the_number_of_times_the_callback_is_invoked()
+    /** @test */
+    function it_can_limit_the_number_of_times_the_callback_is_invoked()
     {
         $count = 0;
 
@@ -160,10 +146,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertEquals(3, $count);
     }
 
-    /**
-     * @test
-     */
-    public function it_has_a_helper_method_for_bypassing_the_callback()
+    /** @test */
+    function it_has_a_helper_method_for_bypassing_the_callback()
     {
         $count = 0;
 
@@ -189,10 +173,8 @@ class HookTest extends WP_UnitTestCase
     }
 
 
-    /**
-     * @test
-     */
-    public function it_can_be_set_to_only_fire_once()
+    /** @test */
+    function it_can_be_set_to_only_fire_once()
     {
         $count = 0;
 
@@ -225,10 +207,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertEquals(2, $result);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_remove_its_hook_if_needed()
+    /** @test */
+    function it_can_remove_its_hook_if_needed()
     {
         $hook = Hook::on('remove_this_test')
             ->setCallback(function () {
@@ -245,10 +225,8 @@ class HookTest extends WP_UnitTestCase
         do_action('remove_this_test');
     }
 
-    /**
-     * @test
-     */
-    public function it_has_a_helper_function_for_removing_hooks_now_and_in_the_future()
+    /** @test */
+    function it_has_a_helper_function_for_removing_hooks_now_and_in_the_future()
     {
         // exhibit A
         add_action('hook_one', 'cb_one');
@@ -266,10 +244,8 @@ class HookTest extends WP_UnitTestCase
         do_action('hook_two');
     }
 
-    /**
-     * @test
-     */
-    public function it_handles_different_callable_syntaxes()
+    /** @test */
+    function it_handles_different_callable_syntaxes()
     {
         Hook::on('test_function_name_as_string')
             ->setCallback('aNormalFunction')
@@ -296,9 +272,7 @@ class HookTest extends WP_UnitTestCase
         do_action('test_instance_method_as_array');
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_can_accept_a_condition_to_control_the_invocation_of_the_callback()
     {
         on('conditional_test', static function () {
@@ -354,10 +328,8 @@ class HookTest extends WP_UnitTestCase
         $this->assertSame(['Donald', 'Hillary', 'Bill', 'Evil Bill'], $names);
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_the_first_parameter_if_the_callback_returns_nothing()
+    /** @test */
+    function it_returns_the_first_parameter_if_the_callback_returns_nothing()
     {
         $spy = 'spy';
 

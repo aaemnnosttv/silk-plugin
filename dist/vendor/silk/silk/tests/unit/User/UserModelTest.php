@@ -1,23 +1,18 @@
 <?php
 
 use Silk\User\Model as User;
-use Silk\Contracts\Query\BuildsQueries;
 use Silk\Type\ShorthandProperties;
 
 class UserModelTest extends WP_UnitTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     function it_can_be_constructed_with_no_parameters()
     {
         new User;
     }
 
-    /**
-     * @test
-     */
-    public function it_takes_a_wp_user_or_array_of_user_attributes_in_the_constructor()
+    /** @test */
+    function it_takes_a_wp_user_or_array_of_user_attributes_in_the_constructor()
     {
         $blankUser = new WP_User;
 
@@ -34,12 +29,10 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertSame('iheartkate', $modelFromAtts->object->user_pass);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_create_a_new_instance_from_a_user_id()
+    /** @test */
+    function it_can_create_a_new_instance_from_a_user_id()
     {
-        $user_id = $this->factory->user->create();
+        $user_id = $this->factory()->user->create();
 
         $model = User::fromID($user_id);
 
@@ -51,18 +44,16 @@ class UserModelTest extends WP_UnitTestCase
      * @test
      * @expectedException Silk\User\Exception\UserNotFoundException
      */
-    public function it_blows_up_if_unable_to_locate_a_user_by_id()
+    function it_blows_up_if_unable_to_locate_a_user_by_id()
     {
         User::fromID(0);
     }
 
 
-    /**
-     * @test
-     */
-    public function it_can_create_a_new_instance_from_a_username()
+    /** @test */
+    function it_can_create_a_new_instance_from_a_username()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
 
         $model = User::fromUsername($user->user_login);
 
@@ -74,18 +65,16 @@ class UserModelTest extends WP_UnitTestCase
      * @test
      * @expectedException Silk\User\Exception\UserNotFoundException
      */
-    public function it_blows_up_if_no_user_is_found_with_the_given_username()
+    function it_blows_up_if_no_user_is_found_with_the_given_username()
     {
         User::fromUsername('non-existent-username');
     }
 
 
-    /**
-     * @test
-     */
-    public function it_can_create_a_new_instance_from_the_users_email_address()
+    /** @test */
+    function it_can_create_a_new_instance_from_the_users_email_address()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
 
         $model = User::fromEmail($user->user_email);
 
@@ -97,17 +86,15 @@ class UserModelTest extends WP_UnitTestCase
      * @test
      * @expectedException Silk\User\Exception\UserNotFoundException
      */
-    public function it_blows_up_if_no_user_is_found_with_the_given_email()
+    function it_blows_up_if_no_user_is_found_with_the_given_email()
     {
         User::fromEmail('non-existent@user.com');
     }
 
-    /**
-     * @test
-     */
-    public function it_can_create_a_new_instance_from_the_user_slug()
+    /** @test */
+    function it_can_create_a_new_instance_from_the_user_slug()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
 
         $model = User::fromSlug($user->user_nicename);
 
@@ -119,15 +106,13 @@ class UserModelTest extends WP_UnitTestCase
      * @test
      * @expectedException Silk\User\Exception\UserNotFoundException
      */
-    public function it_blows_up_if_no_user_is_found_with_the_given_slug()
+    function it_blows_up_if_no_user_is_found_with_the_given_slug()
     {
         User::fromSlug('non-existent');
     }
 
-    /**
-     * @test
-     */
-    public function it_can_create_a_new_user_from_a_new_instance()
+    /** @test */
+    function it_can_create_a_new_user_from_a_new_instance()
     {
         $model = new User;
         $model->user_login = 'bigbird';
@@ -143,7 +128,7 @@ class UserModelTest extends WP_UnitTestCase
      * @test
      * @expectedException \Silk\Exception\WP_ErrorException
      */
-    public function it_blows_up_if_trying_to_create_a_user_without_a_username()
+    function it_blows_up_if_trying_to_create_a_user_without_a_username()
     {
         $model = new User;
         $model->user_login = '';
@@ -151,12 +136,10 @@ class UserModelTest extends WP_UnitTestCase
         $model->save();
     }
 
-    /**
-     * @test
-     */
-    public function it_can_update_an_existing_user()
+    /** @test */
+    function it_can_update_an_existing_user()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
 
         $model = new User($user);
         $model->first_name = 'Franky';
@@ -169,12 +152,10 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertSame('Fivefingers', $updated->last_name);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_delete_the_modeled_user()
+    /** @test */
+    function it_can_delete_the_modeled_user()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
 
         $model = new User($user);
 
@@ -183,12 +164,10 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertFalse(get_user_by('ID', $user->ID));
     }
 
-    /**
-     * @test
-     */
-    public function it_exposes_the_meta_api_for_users()
+    /** @test */
+    function it_exposes_the_meta_api_for_users()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
 
         $model = new User($user);
 
@@ -203,20 +182,16 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertSame('pizza', $model->favorite_food);
     }
 
-    /**
-     * @test
-     */
-    public function the_query_method_fulfills_the_contract()
+    /** @test */
+    function the_query_method_fulfills_the_contract()
     {
-        $this->assertInstanceOf(BuildsQueries::class, User::query());
+        $this->assertInstanceOf(\Silk\Query\Builder::class, User::query());
     }
 
-    /**
-     * @test
-     */
-    public function it_has_a_method_to_get_the_url_for_the_users_posts()
+    /** @test */
+    function it_has_a_method_to_get_the_url_for_the_users_posts()
     {
-        $user = $this->factory->user->create_and_get(['nicename' => 'franky']);
+        $user = $this->factory()->user->create_and_get(['nicename' => 'franky']);
         $model = new User($user);
 
         $this->assertSame(
@@ -225,9 +200,7 @@ class UserModelTest extends WP_UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_can_create_a_new_user()
     {
         $model = User::create([
@@ -241,12 +214,10 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertSame('ralph', $user->user_login);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_can_create_a_new_instance_from_the_current_authenticated_user()
     {
-        $user_id = $this->factory->user->create();
+        $user_id = $this->factory()->user->create();
         wp_set_current_user($user_id);
 
         $model = User::auth();
@@ -254,9 +225,7 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertSame($user_id, $model->id);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_refreshes_the_user_object_on_save()
     {
         $model = new User;
@@ -268,12 +237,10 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertTrue(wp_check_password('password', $model->user_pass));
     }
 
-    /**
-     * @test
-     */
-    public function it_can_alias_some_properties_to_user_data()
+    /** @test */
+    function it_can_alias_some_properties_to_user_data()
     {
-        $user = $this->factory->user->create_and_get();
+        $user = $this->factory()->user->create_and_get();
         $model = new UserWithAliases($user);
 
         $this->assertSame($user->user_email, $model->email);
@@ -282,9 +249,7 @@ class UserModelTest extends WP_UnitTestCase
         $this->assertSame($user->user_pass, $model->password);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     function it_works_with_shorthand_too()
     {
         $model = new ShorthandUser([
@@ -302,6 +267,34 @@ class UserModelTest extends WP_UnitTestCase
 
         $this->assertSame('helper', $model->user_login);
         $this->assertSame('6789', $model->user_pass);
+    }
+
+    /** @test */
+    function it_has_a_method_for_soft_retrieving_the_model_by_its_primary_id()
+    {
+        $user_id = $this->factory()->user->create();
+
+        try {
+            $model = User::find($user_id);
+        } catch (\Exception $e) {
+            $this->fail("Exception thrown while finding user with ID $user_id. " . $e->getMessage());
+        }
+
+        $this->assertEquals($user_id, $model->id);
+    }
+
+    /** @test */
+    function find_returns_null_if_the_model_cannot_be_found()
+    {
+        $user_id = 0;
+
+        try {
+            $model = User::find($user_id);
+        } catch (\Exception $e) {
+            $this->fail("Exception thrown while finding user with ID $user_id. " . $e->getMessage());
+        }
+
+        $this->assertNull($model);
     }
 }
 
